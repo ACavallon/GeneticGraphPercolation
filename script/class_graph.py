@@ -201,7 +201,7 @@ class Graph(object):
 
     def diameter(self):
         """ calculates the diameter of the graph """
-        
+        # could be time intensive #
         v = self.vertices() 
         pairs = [ (v[i],v[j]) for i in range(len(v)-1) for j in range(i+1, len(v))]
         smallest_paths = []

@@ -6,18 +6,35 @@ Created on Mon Nov  2 20:59:31 2020
 """
 
 import pandas as pd
+import numpy as np
 import os
+import random
 
-path_script = 'C:\\Users\\acava\\Documents\\data_science\\genGraphPercolation\\script'
+path_script = 'C:\\Users\\acava\\Documents\\GitHub\\genGraphPercolation\\script'
 os.chdir(path_script)
 os.getcwd()
 
-import class_graph
+from class_graph import Graph
 import functions as F
 
 genetic_bases = 'ACGT'
 len_sequence = 4
+prob_thre = 0.3
+num_iteration = 5
 
-graph = F.graph_generator(genetic_bases, len_sequence)
+np.random.seed(42)
 
-        
+# generation of the dictionary generating the genetic graph
+graph_dict = F.graph_generator(genetic_bases, len_sequence)
+
+# creation of the object graph
+graph_structure = Graph(graph_dict)
+
+list_edges_new = list()
+
+# Edges of the link are kept if the extracted probability is less than threshold
+for ind, ver in enumerate(graph_structure.edges()):
+    if random.uniform(0, 1) < prob_thre:
+        list_edges_new.append(ver)
+            
+
