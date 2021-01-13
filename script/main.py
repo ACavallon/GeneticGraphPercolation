@@ -8,7 +8,6 @@ Created on Mon Nov  2 20:59:31 2020
 import pandas as pd
 import numpy as np
 import os
-import random
 
 path_script = 'C:\\Users\\acava\\Documents\\GitHub\\genGraphPercolation\\script'
 os.chdir(path_script)
@@ -30,11 +29,11 @@ graph_dict = F.graph_generator(genetic_bases, len_sequence)
 # creation of the object graph
 graph_structure = Graph(graph_dict)
 
-list_edges_new = list()
-
 # Edges of the link are kept if the extracted probability is less than threshold
-for ind, ver in enumerate(graph_structure.edges()):
-    if random.uniform(0, 1) < prob_thre:
-        list_edges_new.append(ver)
+list_edges_pruned = F.edges_pruning(graph_structure.edges(), prob_thre)
             
 
+
+
+
+list_first_neig = [[i,ogg] for i, ogg in enumerate(list_edges_pruned) if len(set.intersection(list_edges_pruned[0], ogg))==1]

@@ -6,6 +6,7 @@ Created on Mon Nov  2 21:04:35 2020
 """
 
 from itertools import product
+import random
 
 # Generating all the possible combination of genetic sequence o given length
 
@@ -44,3 +45,12 @@ def edges_generator(vertex, list_vertex):
             list_results.append(ind)
     
     return list_results
+
+
+def edges_pruning(old_list, proba):
+    new_list = []
+    for ind, ver in enumerate(old_list):
+        if random.uniform(0, 1) < proba:
+            new_list.append(ver)
+            
+    return new_list
